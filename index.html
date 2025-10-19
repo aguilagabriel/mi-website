@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The SDQ - Fast takes. Real talk.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .bg-brand-red { background-color: #C1272D; }
+        .bg-brand-blue { background-color: #1F3A93; }
+        .text-brand-red { color: #C1272D; }
+        .text-brand-blue { color: #1F3A93; }
+        
+        /* Animación de Glitch sutil para el logo */
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        .logo-glitch:hover {
+            animation: glitch 1s linear infinite;
+        }
+        
+        /* Animación de aparición para las secciones */
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilo para el header al hacer scroll */
+        .scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 🧭 Navegación ultra simple -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold tracking-wider">TheSDQ</a>
+            <nav class="hidden md:flex items-center space-x-6 text-sm">
+                <a href="#home" class="hover:text-brand-red transition-colors">Home</a>
+                <a href="#trending" class="hover:text-brand-red transition-colors">Trending</a>
+                <a href="#about" class="hover:text-brand-red transition-colors">About</a>
+                <a href="#connect" class="hover:text-brand-red transition-colors">Connect</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Iconos de redes sociales -->
+                <a href="#" aria-label="TikTok" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.85-.38-6.75-1.77-2.06-1.52-3.05-3.88-3.09-6.35.03-2.13.86-4.28 2.39-5.87 1.52-1.58 3.5-2.32 5.5-2.41.09 2.08.02 4.16.04 6.24-.03 1.33-.62 2.61-1.69 3.48-1.05.86-2.41 1.11-3.73 1.11-1.29 0-2.57-.31-3.69-1.02-.6-.37-1.04-.85-1.42-1.41-.02-1.48-.01-2.95-.01-4.43.01-1.53.01-3.05.01-4.58.05-1.07.32-2.12.89-3.05.92-1.52 2.4-2.58 4.07-2.88.51-.09 1.03-.14 1.54-.15 1.02-.02 2.04-.01 3.06-.02.02 1.51.02 3.02.01 4.53-.01 1.22.4 2.45 1.34 3.25.95.81 2.21 1.05 3.45 1.02.2-.01.4-.01.6-.02v-4.11c-.43.02-.86.05-1.28.07-1.33.05-2.65-.21-3.79-1.01-.84-.59-1.28-1.48-1.38-2.54-.05-1.68-.02-3.37-.01-5.06z"/></svg></a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163m0-1.602c-3.264 0-3.66.014-4.944.072-4.268.195-6.177 2.1-6.372 6.372C.614 8.34.6 8.74.6 12s.014 3.66.072 4.944c.195 4.272 2.104 6.177 6.372 6.372 1.284.058 1.68.072 4.944.072s3.66-.014 4.944-.072c4.272-.195 6.177-2.1 6.372-6.372.058-1.284.072-1.68.072-4.944s-.014-3.66-.072-4.944c-.195-4.272-2.104-6.177-6.372-6.372C15.66.574 15.264.561 12 .561z"/><path d="M12 6.865c-2.835 0-5.135 2.3-5.135 5.135s2.3 5.135 5.135 5.135 5.135-2.3 5.135-5.135-2.3-5.135-5.135-5.135zm0 8.67c-1.956 0-3.535-1.58-3.535-3.535s1.58-3.535 3.535-3.535 3.535 1.58 3.535 3.535-1.58 3.535-3.535 3.535z"/><path d="M16.949 5.385c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5z"/></svg></a>
+                <a href="#" aria-label="X" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 🧱 1. Hero Section -->
+        <section id="home" class="h-screen flex flex-col justify-center items-center text-center p-6">
+            <h1 class="font-playfair font-black text-7xl md:text-9xl tracking-tighter logo-glitch transition-all duration-300">
+                THE SDQ
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-lg">
+                Fast takes. Real talk. From Santo Domingo to the world.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#trending" class="bg-brand-red text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                    Watch latest clips
+                </a>
+                <a href="#connect" class="border-2 border-gray-500 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-black transition-colors duration-300">
+                    Follow SDQ Times
+                </a>
+            </div>
+        </section>
+
+        <!-- 📰 2. Trending Now -->
+        <section id="trending" class="py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Trending Now</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Clips -->
+                    <div class="group aspect-w-1 aspect-h-1 relative rounded-lg overflow-hidden cursor-pointer" onclick="alert('Playing clip 1!')">
+                        <img src="https://placehold.co/400x400/C1272D/FFFFFF?text=Clip+1" alt="Trending Clip 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                           <div class="self-center my-auto"><svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div>
+                           <h3 class="text-white font-bold text-sm md:text-base leading-tight">Debate Caliente: ¿Son los tapones una política de estado?</h3>
+                        </div>
+                    </div>
+                    <!-- Repetir clip cards -->
+                    <div class="group aspect-w-1 aspect-h-1 relative rounded-lg overflow-hidden cursor-pointer" onclick="alert('Playing clip 2!')">
+                        <img src="https://placehold.co/400x400/1F3A93/FFFFFF?text=Clip+2" alt="Trending Clip 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                           <div class="self-center my-auto"><svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div>
+                           <h3 class="text-white font-bold text-sm md:text-base leading-tight">El sargazo en el Este: ¿Qué no nos están diciendo?</h3>
+                        </div>
+                    </div>
+                    <div class="group aspect-w-1 aspect-h-1 relative rounded-lg overflow-hidden cursor-pointer" onclick="alert('Playing clip 3!')">
+                        <img src="https://placehold.co/400x400/FFFFFF/000000?text=Clip+3" alt="Trending Clip 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                           <div class="self-center my-auto"><svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div>
+                           <h3 class="text-white font-bold text-sm md:text-base leading-tight">La verdad sobre el "delivery" en la Zona Colonial.</h3>
+                        </div>
+                    </div>
+                    <div class="group aspect-w-1 aspect-h-1 relative rounded-lg overflow-hidden cursor-pointer" onclick="alert('Playing clip 4!')">
+                        <img src="https://placehold.co/400x400/333333/FFFFFF?text=Clip+4" alt="Trending Clip 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                         <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                           <div class="self-center my-auto"><svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div>
+                           <h3 class="text-white font-bold text-sm md:text-base leading-tight">¿El mejor chimi de la capital? Lo encontramos.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 💬 3. About / Editorial Tone -->
+        <section id="about" class="py-16 md:py-24 text-center section-fade-in">
+            <div class="container mx-auto px-6">
+                <p class="text-2xl md:text-3xl font-bold max-w-3xl mx-auto leading-tight">
+                    We don’t do boring news. We do SDQ news — <span class="text-brand-red">fast</span>, <span class="text-brand-blue">bold</span>, unfiltered.
+                </p>
+                <button id="read-story-btn" class="mt-8 border-2 border-gray-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-white hover:text-black transition-colors duration-300">
+                    Read our story
+                </button>
+                <div id="story-content" class="hidden max-w-2xl mx-auto text-left text-gray-300 mt-8 space-y-4">
+                    <p>The SDQ nació de una simple idea: las noticias no tienen por qué ser un monólogo aburrido. Vivimos en la era del scroll, del clip de 15 segundos y de la conversación instantánea. Nuestro periodismo refleja eso.</p>
+                    <p>Somos un colectivo de creadores, periodistas y curiosos que recorremos Santo Domingo (y más allá) para capturar las historias que importan, contadas de una forma que conecta. Sin filtros, sin agendas ocultas. Solo la verdad, servida rápido. That's the SDQ way.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🔗 4. Follow & Connect -->
+        <section id="connect" class="py-16 md:py-24 section-fade-in">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Follow & Connect</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="#" class="bg-gray-900 p-8 rounded-lg text-center hover:bg-gray-800 transition-colors duration-300 flex flex-col items-center">
+                        <svg class="w-10 h-10 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.85-.38-6.75-1.77-2.06-1.52-3.05-3.88-3.09-6.35.03-2.13.86-4.28 2.39-5.87 1.52-1.58 3.5-2.32 5.5-2.41.09 2.08.02 4.16.04 6.24-.03 1.33-.62 2.61-1.69 3.48-1.05.86-2.41 1.11-3.73 1.11-1.29 0-2.57-.31-3.69-1.02-.6-.37-1.04-.85-1.42-1.41-.02-1.48-.01-2.95-.01-4.43.01-1.53.01-3.05.01-4.58.05-1.07.32-2.12.89-3.05.92-1.52 2.4-2.58 4.07-2.88.51-.09 1.03-.14 1.54-.15 1.02-.02 2.04-.01 3.06-.02.02 1.51.02 3.02.01 4.53-.01 1.22.4 2.45 1.34 3.25.95.81 2.21 1.05 3.45 1.02.2-.01.4-.01.6-.02v-4.11c-.43.02-.86.05-1.28.07-1.33.05-2.65-.21-3.79-1.01-.84-.59-1.28-1.48-1.38-2.54-.05-1.68-.02-3.37-.01-5.06z"/></svg>
+                        <h3 class="font-bold text-xl">Watch on TikTok</h3>
+                    </a>
+                    <a href="#" class="bg-gray-900 p-8 rounded-lg text-center hover:bg-gray-800 transition-colors duration-300 flex flex-col items-center">
+                        <svg class="w-10 h-10 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <h3 class="font-bold text-xl">Join on X</h3>
+                    </a>
+                    <a href="#" class="bg-gray-900 p-8 rounded-lg text-center hover:bg-gray-800 transition-colors duration-300 flex flex-col items-center">
+                        <svg class="w-10 h-10 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                        <h3 class="font-bold text-xl">Clips first on YouTube</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ✉️ 5. Newsletter -->
+        <section id="newsletter" class="py-16 md:py-24 bg-gray-900 section-fade-in">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-2xl md:text-3xl font-bold">Get the hot takes before they trend.</h2>
+                <form class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email" class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-red" required>
+                    <button type="submit" class="bg-brand-red text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ⚡ 6. Footer -->
+    <footer class="py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p class="font-bold text-lg text-white">TheSDQ</p>
+            <div class="my-4 flex justify-center space-x-6 text-sm">
+                <a href="#" class="hover:text-white">About</a>
+                <a href="#" class="hover:text-white">Contact</a>
+                <a href="#" class="hover:text-white">Press</a>
+                <a href="#" class="hover:text-white">Privacy</a>
+            </div>
+            <p class="text-sm">© 2025 The SDQ. Built for the loud side of the island.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Botón "Read our story"
+            const storyBtn = document.getElementById('read-story-btn');
+            const storyContent = document.getElementById('story-content');
+            storyBtn.addEventListener('click', () => {
+                storyContent.classList.toggle('hidden');
+                storyBtn.textContent = storyContent.classList.contains('hidden') ? 'Read our story' : 'Show less';
+            });
+
+            // Header con scroll
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Animación de aparición de secciones
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
